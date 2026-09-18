@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.1.1 - 2026-09-18
+#### Bug Fixes
+- missing VERSION file in hex package - (122e03b) - Ryn Cao
+#### Documentation
+- add ci and hex badges - (c43e2a7) - Ryn Cao
+
+- - -
+
 ## v0.1.0 - 2026-09-18
 #### Features
 - add basic db ops code - (e3f5587) - Ryn Cao
