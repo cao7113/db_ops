@@ -11,7 +11,7 @@ pre = "alpha.*"
 skip_ci = "[skip ci]"
 skip_untracked = false
 pre_bump_hooks = [
-    "echo {{version}} > VERSION",
+    "echo -n {{version}} > VERSION",
     "echo 'bumping from {{latest|0.0.0}} to {{version|0.0.1}}'",
 ]
 post_bump_hooks = ["git push", "git push origin {{version_tag}}"]

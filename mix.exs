@@ -36,6 +36,7 @@ defmodule DbOps.MixProject do
 
   defp package do
     [
+      files: ["lib", "mix.exs", "README*", "CHANGELOG*", "VERSION"],
       licenses: ["MIT"],
       links: %{"GitHub" => @source_url}
     ]
