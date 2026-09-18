@@ -1,3 +1,4 @@
+tag_prefix = "v"
 from_latest_tag = false
 ignore_merge_commits = false
 ignore_fixup_commits = false
@@ -9,8 +10,11 @@ branch_whitelist = []
 pre = "alpha.*"
 skip_ci = "[skip ci]"
 skip_untracked = false
-pre_bump_hooks = []
-post_bump_hooks = []
+pre_bump_hooks = [
+    "echo {{version}} > VERSION",
+    "echo 'bumping from {{latest|0.0.0}} to {{version|0.0.1}}'",
+]
+post_bump_hooks = ["git push", "git push origin {{version_tag}}"]
 pre_package_bump_hooks = []
 post_package_bump_hooks = []
 
