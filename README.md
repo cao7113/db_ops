@@ -1,4 +1,7 @@
 # DbOps
+[![CI](https://github.com/cao7113/db_ops/actions/workflows/ci.yml/badge.svg)](https://github.com/cao7113/db_ops/actions/workflows/ci.yml)
+[![Release](https://github.com/cao7113/db_ops/actions/workflows/release.yml/badge.svg)](https://github.com/cao7113/db_ops/actions/workflows/release.yml)
+[![Hex](https://img.shields.io/hexpm/v/db_ops)](https://hex.pm/packages/db_ops)
 
 Lightweight runtime db management utility for Elixir/Ecto Releases without Mix.
 
