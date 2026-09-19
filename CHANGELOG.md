@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.2.1 - 2026-09-19
+#### Bug Fixes
+- improve repo_config inspect info - (c5ecfdb) - Ryn Cao
+
+- - -
+
 ## v0.2.0 - 2026-09-19
 #### Features
 - add whole-lifecycle db ops commands from get conn url string to get current status - (019c6c0) - Ryn Cao
