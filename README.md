@@ -12,7 +12,7 @@ Add `db_ops` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:db_ops, "~> 0.1.0"}
+    {:db_ops, "~> 0.2"}
   ]
 end
 ```

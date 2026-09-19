@@ -1,4 +1,6 @@
 defmodule DbOps do
+  import DbOps.Utils, only: [load_app: 1, repos: 1, compact_db_config: 1]
+
   @moduledoc """
   Lightweight runtime database management utility for Elixir/Ecto Releases.
 
@@ -24,14 +26,14 @@ defmodule DbOps do
 
       case repo_adapter.storage_up(repo_config) do
         :ok ->
-          IO.puts("✅ [DbOps] Database created successfully for #{inspect(repo_config)}")
+          IO.puts("✅ [DbOps] Database created successfully for #{compact_db_config(repo_config)}")
 
         {:error, :already_up} ->
-          IO.puts("ℹ️ [DbOps] Database already exists for #{inspect(repo_config)}")
+          IO.puts("ℹ️ [DbOps] Database already exists for #{compact_db_config(repo_config)}")
 
         {:error, term} ->
           IO.puts(
-            "❌ [DbOps] Failed to create database for #{inspect(repo_config)}: #{inspect(term)}"
+            "❌ [DbOps] Failed to create database for #{compact_db_config(repo_config)}: #{inspect(term)}"
           )
       end
     end
@@ -71,14 +73,16 @@ defmodule DbOps do
 
         case repo_adapter.storage_down(repo_config) do
           :ok ->
-            IO.puts("🔥 [DbOps] Database dropped successfully for #{inspect(repo_config)}")
+            IO.puts(
+              "🔥 [DbOps] Database dropped successfully for #{compact_db_config(repo_config)}"
+            )
 
           {:error, :already_down} ->
-            IO.puts("ℹ️ [DbOps] Database does not exist for #{inspect(repo_config)}")
+            IO.puts("ℹ️ [DbOps] Database does not exist for #{compact_db_config(repo_config)}")
 
           {:error, term} ->
             IO.puts(
-              "❌ [DbOps] Failed to drop database for #{inspect(repo_config)}: #{inspect(term)}"
+              "❌ [DbOps] Failed to drop database for #{compact_db_config(repo_config)}: #{inspect(term)}"
             )
         end
       end
@@ -137,14 +141,14 @@ defmodule DbOps do
 
       case repo_adapter.storage_status(repo_config) do
         :up ->
-          IO.puts("✅ [DbOps] Database is up for #{inspect(repo_config)}")
+          IO.puts("✅ [DbOps] Database is up for #{compact_db_config(repo_config)}")
 
         :down ->
-          IO.puts("ℹ️ [DbOps] Database is down for #{inspect(repo_config)}")
+          IO.puts("ℹ️ [DbOps] Database is down for #{compact_db_config(repo_config)}")
 
         {:error, term} ->
           IO.puts(
-            "❌ [DbOps] Failed to check database status for #{inspect(repo_config)}: #{inspect(term)}"
+            "❌ [DbOps] Failed to check database status for #{compact_db_config(repo_config)}: #{inspect(term)}"
           )
       end
     end
@@ -201,18 +205,6 @@ defmodule DbOps do
   """
   @spec default_app() :: atom()
   def default_app do
-    Application.fetch_env!(:db_ops, :default_app)
-  end
-
-  @spec repos(atom()) :: [module() | {module(), keyword()}]
-  defp repos(app) when is_atom(app) do
-    Application.fetch_env!(app, :ecto_repos)
-  end
-
-  @spec load_app(atom()) :: :ok
-  defp load_app(app) when is_atom(app) do
-    Application.ensure_all_started(:ssl)
-    Application.ensure_loaded(app)
-    :ok
+    DbOps.Utils.default_app()
   end
 end

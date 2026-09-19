@@ -8,6 +8,19 @@ defmodule DbOpsTest do
     def start_link, do: {:ok, self()}
   end
 
+  defmodule FakeRepoWithAuth do
+    def config,
+      do: [
+        hostname: "localhost",
+        database: "db_ops_test",
+        username: "postgres",
+        password: "secret"
+      ]
+
+    def __adapter__, do: DbOpsTest.FakeAdapter
+    def start_link, do: {:ok, self()}
+  end
+
   defmodule FakeAdapter do
     def storage_up(_config), do: :ok
     def storage_down(_config), do: :ok
@@ -43,6 +56,18 @@ defmodule DbOpsTest do
     Application.put_env(:db_ops, :ecto_repos, [FakeRepo])
 
     assert DbOps.create(:db_ops) == :ok
+  end
+
+  test "create/1 logs only hostname, database, and username" do
+    Application.put_env(:db_ops, :ecto_repos, [FakeRepoWithAuth])
+
+    output =
+      ExUnit.CaptureIO.capture_io(fn ->
+        assert DbOps.create(:db_ops) == :ok
+      end)
+
+    assert output =~ "hostname=localhost, database=db_ops_test, username=postgres"
+    refute output =~ "password"
   end
 
   test "create/0 uses the configured default application" do
