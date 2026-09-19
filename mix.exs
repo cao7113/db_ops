@@ -1,6 +1,10 @@
 defmodule DbOps.MixProject do
   use Mix.Project
 
+  # https://elixir.hexdocs.pm/Module.html#module-external_resource
+  # 声明外部资源文件：当 VERSION 文件改变时，强制 Mix 重新编译 mix.exs
+  @external_resource "VERSION"
+
   @version File.read!("VERSION") |> String.trim()
   @source_url "https://github.com/cao7113/db_ops"
   @desc "Lightweight runtime database management operations (create, seed, drop) for Elixir/Ecto Releases without Mix."
@@ -36,6 +40,7 @@ defmodule DbOps.MixProject do
 
   defp package do
     [
+      # https://hex.pm/packages/db_ops/0.1.1/files
       files: ["lib", "mix.exs", "README*", "CHANGELOG*", "VERSION"],
       licenses: ["MIT"],
       links: %{"GitHub" => @source_url}

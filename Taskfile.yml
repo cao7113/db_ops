@@ -7,8 +7,10 @@ tasks:
   fmt: mix format
 
   rel: mix hex.publish
-
   doc: mix docs
+
+  ecto.create.code: |
+    wget https://raw.githubusercontent.com/elixir-ecto/ecto/refs/tags/v3.14.2/lib/mix/tasks/ecto.create.ex
 
   setup: |
     mix deps.get
