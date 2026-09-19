@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## v0.2.2 - 2026-09-19
+#### Bug Fixes
+- improve output string - (2c3da36) - Ryn Cao
+
+- - -
+
 ## v0.2.1 - 2026-09-19
 #### Bug Fixes
 - improve repo_config inspect info - (c5ecfdb) - Ryn Cao
